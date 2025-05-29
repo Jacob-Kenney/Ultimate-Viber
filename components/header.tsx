@@ -74,7 +74,7 @@ export function Header() {
           {session ? 
             /* Logout */
             <div className="flex gap-2">
-              <Button onClick={() => signOut()} size="sm" asChild>
+              <Button onClick={() => signOut()} size="sm">
                 Sign Out
               </Button>
             </div>
@@ -133,7 +133,7 @@ export function Header() {
           {session ? 
             /* Logout */
             <div className="flex gap-2 pt-2">
-              <Button onClick={() => signOut()} size="sm" asChild>
+              <Button onClick={() => signOut()} size="sm">
                 Sign Out
               </Button>
             </div>
