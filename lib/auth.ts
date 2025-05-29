@@ -12,7 +12,14 @@ const redis = Redis.fromEnv();
  
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: UpstashRedisAdapter(redis),
-  providers: [Google, GitHub, Resend],
+  providers: [
+    Google, 
+    GitHub, 
+    Resend({
+      server: process.env.AUTH_RESEND_KEY,
+      from: "onboarding@resend.dev"
+    })
+  ],
   pages: {
     signIn: "/login",
   }
