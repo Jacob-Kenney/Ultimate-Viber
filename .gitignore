@@ -5,7 +5,6 @@ node_modules
 target
 dist
 logs
-public
 .cache
 .vscode
 .DS_Store
@@ -38,7 +37,6 @@ coverage
 _docpress
 .DS_Store
 
-lib
 dist
 tsconfig.tsbuildinfo
 test.lib/
