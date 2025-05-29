@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import {Github, Mail, Clock} from "lucide-react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
+import Image from 'next/image'
+import { useTheme } from "next-themes";
 
 export function SignIn() {
+    const { theme } = useTheme();
     const [isVisible, setIsVisible] = useState(false);
     const [magicLinkSent, setMagicLinkSent] = useState(false);
     const [email, setEmail] = useState("")
+    
 
     const resendAction = (formData: FormData) => {
         const email = formData.get("email") as string;
@@ -20,6 +23,10 @@ export function SignIn() {
     useEffect(() => {
         setIsVisible(true);
     }, []);
+
+    if (!isVisible) {
+        return null;
+    }
 
     return (
         <div className="flex flex-col px-4 py-12 md:py-20">
@@ -35,7 +42,7 @@ export function SignIn() {
                     </h1>
                 </div>
                 <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-                    <p className="text-md text-muted-foreground mb-8 mx-auto leading-relaxed">Everyone else teaches the past. Here, you'll learn what's next. Build the future - today.</p>
+                    <p className="text-md text-muted-foreground mb-8 mx-auto leading-relaxed"><i>"The Hottest New Programming Language is English"</i> -- Andrej Kaparthy</p>
                 </div>
             </div>
 
@@ -54,7 +61,7 @@ export function SignIn() {
                             </h1>
                         </div>
                         <div className={`transform transition-all duration-1000 delay-400 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"}`}>
-                            <p className="text-2xl text-muted-foreground mb-8 mx-auto leading-relaxed">Everyone else teaches the past. Here, you'll learn what's next. Build the future - today.</p>
+                            <p className="text-2xl text-muted-foreground mb-8 mx-auto leading-relaxed"><i>"The Hottest New Programming Language is English"</i> -- Andrej Kaparthy</p>
                         </div>
                     </div>
                     {/* Value proposition */}
@@ -88,26 +95,36 @@ export function SignIn() {
                             <span className="w-full border-t" />
                             </div>
                             <div className="relative flex justify-center text-xs uppercase">
-                            <span className="px-2">Or continue with</span>
+                            <span className="hidden px-2">Or continue with</span>
                             </div>
                         </div>
 
                         <div className="space-y-4">
                             <Button
-                            onClick={() => signIn("github")}
+                            onClick={() => signIn("github", {redirectTo: "/"})}
                             variant="outline"
                             className="w-full flex items-center justify-center"
                             >
-                            <Github className="h-5 w-5 mr-2" />
-                                Continue with GitHub
+                            <Image
+                                src={theme === "dark" ? "/ext/github-mark-white.svg" : "/ext/github-mark.svg"}
+                                alt="GitHub"
+                                width={24}
+                                height={24}
+                                className="mr-2" />
+                                Sign in with GitHub
                             </Button>
                             <Button
-                            onClick={() => signIn("google")}
+                            onClick={() => signIn("google", {redirectTo: "/"})}
                             variant="outline"
                             className="w-full flex items-center justify-center"
                             >
-                            <Mail className="h-5 w-5 mr-2" />
-                                Continue with Google
+                            <Image
+                                src={theme === "dark" ? "/ext/web_light_rd_na.svg" : "/ext/web_dark_rd_na.svg"}
+                                alt="Google"
+                                width={24}
+                                height={24}
+                                className="mr-2" />
+                                Sign in with Google
                             </Button>
                         </div>
 

@@ -481,10 +481,8 @@ print(calculate())`,
 
 export default function PromptLabPage() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-      <Suspense fallback={<div>Loading...</div>}>
-        <PromptLab />
-      </Suspense>
-    </ThemeProvider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <PromptLab />
+    </Suspense>
   );
 }

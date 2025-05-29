@@ -1,6 +1,6 @@
 "use client";
-import { LandingPage } from "@/components/prompting/landing-page";
+import { Hero } from "@/components/prompting/hero";
 
 export default function Page() {
-  return <LandingPage />;
+  return <Hero />;
 }

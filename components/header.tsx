@@ -5,10 +5,14 @@ import { MessageSquare, Moon, Sun, Menu, Trophy } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useState } from "react";
+import { signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 export function Header() {
   const { theme, setTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { data: session } = useSession()
 
   return (
     <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50 animate-slide-down">
@@ -67,12 +71,20 @@ export function Header() {
             </Link>
           </Button>
 
-          {/* TODO: Login */}
-          <div className="flex gap-2">
-            <Button size="sm" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-          </div>
+          {session ? 
+            /* Logout */
+            <div className="flex gap-2">
+              <Button onClick={() => signOut()} size="sm" asChild>
+                Sign Out
+              </Button>
+            </div>
+            /* Login */
+            : <div className="flex gap-2">
+              <Button size="sm" asChild>
+                <Link href="/login">Sign In</Link>
+              </Button>
+            </div>
+          }
 
 
           {/* Theme Toggle */}
@@ -118,12 +130,20 @@ export function Header() {
                 Leaderboard
           </Link>
 
-          {/* Login */}
-          <div className="flex gap-2 pt-2">
-            <Button size="sm" asChild>
-              <Link href="/login">Login</Link>
-            </Button>
-          </div>
+          {session ? 
+            /* Logout */
+            <div className="flex gap-2 pt-2">
+              <Button onClick={() => signOut()} size="sm" asChild>
+                Sign Out
+              </Button>
+            </div>
+            /* Login */
+            : <div className="flex gap-2 pt-2">
+              <Button size="sm" asChild>
+                <Link href="/login">Sign In</Link>
+              </Button>
+            </div>
+          } 
         </nav>
       </div>
     </header>

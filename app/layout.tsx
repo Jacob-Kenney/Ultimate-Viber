@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Header } from "@/components/header";
 
 export const metadata: Metadata = {
   title: "The Ultimate Viber - Learn to Build with Language",
@@ -14,7 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            <div className="min-h-screen bg-background">
+              <Header />
+              <main>
+                {children}
+              </main>
+            </div>
+          </ThemeProvider>
+        </SessionProvider>
+      </body>
     </html>
   );
 }
