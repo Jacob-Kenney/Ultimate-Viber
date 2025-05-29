@@ -33,7 +33,7 @@ export function Header() {
         >
           <Menu className="w-5 h-5" />
         </Button>
-
+        
         {/* Actions */}
         <div className="hidden md:flex items-center gap-2">
           {/* Code */}
@@ -66,6 +66,13 @@ export function Header() {
                 Leaderboard
             </Link>
           </Button>
+
+          {/* TODO: Login */}
+          <div className="flex gap-2">
+            <Button size="sm" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
+          </div>
 
 
           {/* Theme Toggle */}
@@ -104,18 +111,19 @@ export function Header() {
           >
             Vibe
           </Link>
-          
-          <div className="flex gap-2 pt-2">
-            <Button size="sm" asChild>
-              <Link href="/editor">Start Learning</Link>
-            </Button>
-          </div>
 
           {/* Leaderboard */}
           <Link href="/leaderboard" className="flex items-center gap-2">
               <Trophy className="w-4 h-4" />
                 Leaderboard
           </Link>
+
+          {/* Login */}
+          <div className="flex gap-2 pt-2">
+            <Button size="sm" asChild>
+              <Link href="/login">Login</Link>
+            </Button>
+          </div>
         </nav>
       </div>
     </header>
